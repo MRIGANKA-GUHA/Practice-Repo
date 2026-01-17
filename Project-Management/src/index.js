@@ -1,11 +1,11 @@
-import dotenv from "dotenv"
-
+import dotenv from "dotenv";
+import app from "./app.js";
 dotenv.config({
-    path: "./.env"
+    path: "./.env",
 });
 
-let myusername= process.env.name;
+const port = process.env.PORT || 6969;
 
-console.log(myusername)
-
-console.log("Hello World");
+app.listen(port, () => {
+    console.log(`App listening on port http://localhost:${port}`);
+});

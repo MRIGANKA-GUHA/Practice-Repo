@@ -22,3 +22,10 @@ import dotenv from "dotenv"
 //FILE STRUCTURE
 We make a file Public where we store images
 src folder in which we have controllers,db,middlewares,models,routes,utils,validators
+
+//EXPRESS INSTALL
+By writing this command "npm install express --save" express installed
+Basic config should be done like urlencoded, taking the req, static
+
+//INSTALLING CORS
+"npm  i cors"
