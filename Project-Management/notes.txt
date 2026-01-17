@@ -1,2 +1,24 @@
+//SETUP
+npm init to start the backend
 We have to set type "module" for "import" statement and "commonjs" for "require" statement
 dev: "node index.js"
+
+//PRETTIER AND GITIGNORE
+For installing prettier We use this line "npm install --save-dev --save-exact prettier"
+For writing prettier "npx prettier . --write"
+For telling which things to be edited we make a file .prettierrc and to tell which files to ignore .prettierignore
+Telling git to ignore files we use .gitignore
+
+//AUTO RESTARTING THE SERVER
+To install nodemon we use this command "npm install --save-dev nodemon"
+"dev": "nodemon index.js",
+    "start": "node index.js"
+we have to change the package.json , start is used for the production and we used node for production and nodemon for development
+ 
+//DOT-ENV INSTALL
+We do it buy this command line "npm i dotenv"
+import dotenv from "dotenv"
+
+//FILE STRUCTURE
+We make a file Public where we store images
+src folder in which we have controllers,db,middlewares,models,routes,utils,validators
