@@ -1,0 +1,2 @@
+We have to set type "module" for "import" statement and "commonjs" for "require" statement
+dev: "node index.js"

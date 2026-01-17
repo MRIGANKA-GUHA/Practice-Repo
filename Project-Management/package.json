@@ -1,0 +1,19 @@
+{
+  "name": "project-management",
+  "version": "1.0.0",
+  "description": "Backend Learning Start",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "Node",
+    "Express"
+  ],
+  "author": "Mriganka Guha",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.8.0"
+  }
+}
