@@ -29,3 +29,6 @@ Basic config should be done like urlencoded, taking the req, static
 
 //INSTALLING CORS
 "npm  i cors"
+
+//API HANDLING
+For apiResponse we create
