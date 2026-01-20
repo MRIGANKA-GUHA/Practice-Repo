@@ -51,3 +51,12 @@ Here we build a healthcheck router and controller where in controller we send th
 and in route we set the route coming in which when it calls we pass on to the controller and it show the respond
 In app.js we told the route direction for example in instagram there are many things like post , reels and many things
 so when somebody search api/v1/reels it will call that route from that it will pass on to the controller. It helps to make the router clean
+
+//USER MODEL
+Here we make which details are necessary for storing the user details, firstly we import mongoose, {Schema} from "mongoose"
+Then we make schema const userSchema= new Schema({})
+export const user= mongoose.model("user", userSchema)
+
+//MONGOOSE 
+It have many powers such as required: [true,"Password is required"] if somebody doesnt fullfill the password the warning will be shown
+unique,type,lowercase,trim etc
