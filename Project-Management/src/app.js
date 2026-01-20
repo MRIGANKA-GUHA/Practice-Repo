@@ -16,6 +16,10 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
 
+//import the ROUTES
+import {router} from "./routes/healthcheck-routes.js"
 
+app.use("/api/v1/healthcheck", router)  //it declare the path when somebody search that url and then it goes to that route after that / things it check by the router
+                                         
 
 export default app;

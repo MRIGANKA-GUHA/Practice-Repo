@@ -43,3 +43,11 @@ We first npm install mongoose then we make a file database connection in which w
 and in env we will declare the url of mongodb. we also change the index.js that if it can connect db then only it can connect to the production
 and the bakend will start
 
+//EXPORTING
+If we use export default we can import it in any name doesnt matter
+
+//CONTROLLER AND ROUTES 
+Here we build a healthcheck router and controller where in controller we send the response if its ok or not 
+and in route we set the route coming in which when it calls we pass on to the controller and it show the respond
+In app.js we told the route direction for example in instagram there are many things like post , reels and many things
+so when somebody search api/v1/reels it will call that route from that it will pass on to the controller. It helps to make the router clean
