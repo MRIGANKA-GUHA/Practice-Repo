@@ -75,7 +75,16 @@ Generally the lifespan of access is too small and refresh token is login
 //JSON WEB TOKEN
 npm i jsonwebtoken
 It have 3 parts Header,Payload,Signature
-To generate jwt we will use crypto node.js facility
+To generate jwt we will use crypto node.js facility import crypto from "crypto"
+
 
 //TEMPORARY TOKEN
 This token are used when we forgot password or email verification ie a security things but need for a short and one time
+
+//MAILGEN
+npm i mailgen
+For preparing mails we widely use mailgen where we set what need to be send when we send emails to verify their email or forgot password
+
+//NODEMAILER
+npm i nodemailer
+For sending mails we used nodemailer widely and we have to set smtp,host,user,pass
