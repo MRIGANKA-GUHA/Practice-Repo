@@ -66,3 +66,16 @@ Here we use bcrypt for hashing password npm i bcrypt
 bcrypt.compare(password,this.password)  For comparing the password
 bcrypt.hash(password,10) 10 rounds of hashing
 
+//ACCESS AND REFRESH TOKEN
+Basically when we login in some website it generate both access and refresh token.Now the refresh token is stored in the DB and the browser
+sends the access token to the server check if valid it serves the request. After sometime the accesss token is expired and automatically the browser
+sends the refresh token to the server and it verify and a new access token is generated in the backend.
+Generally the lifespan of access is too small and refresh token is login
+
+//JSON WEB TOKEN
+npm i jsonwebtoken
+It have 3 parts Header,Payload,Signature
+To generate jwt we will use crypto node.js facility
+
+//TEMPORARY TOKEN
+This token are used when we forgot password or email verification ie a security things but need for a short and one time
