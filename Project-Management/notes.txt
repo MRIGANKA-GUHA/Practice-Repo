@@ -60,3 +60,9 @@ export const user= mongoose.model("user", userSchema)
 //MONGOOSE 
 It have many powers such as required: [true,"Password is required"] if somebody doesnt fullfill the password the warning will be shown
 unique,type,lowercase,trim etc
+
+//HASHING PASSWORD
+Here we use bcrypt for hashing password npm i bcrypt
+bcrypt.compare(password,this.password)  For comparing the password
+bcrypt.hash(password,10) 10 rounds of hashing
+
