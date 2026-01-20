@@ -31,4 +31,15 @@ Basic config should be done like urlencoded, taking the req, static
 "npm  i cors"
 
 //API HANDLING
-For apiResponse we create
+For apiResponse we create a file in which we take statusCode,message,data and export 
+Same we take apiError in which we extends a class Error which gives all the utilities of error and make a structure of it
+
+//CONSTANTS
+It is the constants of the project in which we add roles that will be constant and if we want to extend any other roles in future we can do that also
+the progress in the project
+
+//DB CONNECTION
+We first npm install mongoose then we make a file database connection in which we connect the db in a try catch as it can take time 
+and in env we will declare the url of mongodb. we also change the index.js that if it can connect db then only it can connect to the production
+and the bakend will start
+
