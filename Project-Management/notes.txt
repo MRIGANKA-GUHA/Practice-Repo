@@ -88,3 +88,6 @@ For preparing mails we widely use mailgen where we set what need to be send when
 //NODEMAILER
 npm i nodemailer
 For sending mails we used nodemailer widely and we have to set smtp,host,user,pass
+
+//ASYNC HANDLER
+Rather using try and catch block we can use a async handler to run that request and catch the error through next
