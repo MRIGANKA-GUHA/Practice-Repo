@@ -50,7 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
     user.emailVerificationExpiry = tokenExpiry;
 
     await user.save({
-        validateBeforeSave: false
+        validateBeforeSave: false,
     });
 
     await sendEmail({
