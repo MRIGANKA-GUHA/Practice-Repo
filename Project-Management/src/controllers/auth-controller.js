@@ -36,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
         );
     }
 
-    const user = User.create({
+    const user = await User.create({
         email,
         password,
         username,
@@ -50,7 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
     user.emailVerificationExpiry = tokenExpiry;
 
     await user.save({
-        validateBeforeSave: false,
+        validateBeforeSave: false
     });
 
     await sendEmail({

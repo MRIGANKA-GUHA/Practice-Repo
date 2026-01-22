@@ -94,3 +94,10 @@ Rather using try and catch block we can use a async handler to run that request 
 
 //AUTH CONTROLLER
 Its actually verify the user and register any user in the app 
+Here first we take all the details from the user body and then check whether there is same one in db or not
+if not then we create the user and generate a temporary token for the user for verifying the email. Then returning a response to the frontend removing the
+imp credentials
+and finally json response return healthcheck
+
+//FLOWCHART OF EMAIL SENDING
+First frontend-> Username Email taken -> sendEmail() called with details emailVerificationMailgenContent -> It get all the details and return -> Received in options -> mail object take all the details -> From mail object it calls emailTextual and emailHtml -> They work by generating through mailgenContent which was made by emailVerificationMailgenContent and sent through sendEmail -> Finally transporter.sendMail(mail); send the mail by calling internal func.

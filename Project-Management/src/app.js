@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { router } from "./routes/healthcheck-routes.js";
+import { router as healthCheckRouter } from "./routes/healthcheck-routes.js";
+import { router as authRouter } from "./routes/auth-routes.js";
 const app = express();
 
 //Basic configuration
@@ -21,6 +22,9 @@ app.use(
 
 //Healthcheck route
 
-app.use("/api/v1/healthcheck", router); //it declare the path when somebody search that url and then it goes to that route after that / things it check by the router
+app.use("/api/v1/healthcheck", healthCheckRouter); //it declare the path when somebody search that url and then it goes to that route after that / things it check by the router
+
+//Register route
+app.use("/api/v1/auth", authRouter);
 
 export default app;

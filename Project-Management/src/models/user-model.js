@@ -32,7 +32,7 @@ const userSchema = new Schema(
         },
         fullName: {
             type: String,
-            required: [true, "Name is required"],
+            required: [false, "Name is required"],  //for temporary purpose i set it false
             trim: true,
         },
         password: {
@@ -55,7 +55,7 @@ const userSchema = new Schema(
         emailVerificationToken: {
             type: String,
         },
-        emailVErificationExpiry: {
+        emailVerificationExpiry: {
             type: Date,
         },
     },
@@ -65,9 +65,8 @@ const userSchema = new Schema(
 );
 
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next(); //Its needed to check whether we change password or not as sometimes we only change username or fullname
+    if (!this.isModified("password")) return ; //Its needed to check whether we change password or not as sometimes we only change username or fullname
     this.password = await bcrypt.hash(this.password, 10);
-    next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
