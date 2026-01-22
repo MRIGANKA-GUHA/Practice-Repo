@@ -91,3 +91,6 @@ For sending mails we used nodemailer widely and we have to set smtp,host,user,pa
 
 //ASYNC HANDLER
 Rather using try and catch block we can use a async handler to run that request and catch the error through next
+
+//AUTH CONTROLLER
+Its actually verify the user and register any user in the app 
