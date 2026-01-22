@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { router as healthCheckRouter } from "./routes/healthcheck-routes.js";
 import { router as authRouter } from "./routes/auth-routes.js";
+
 const app = express();
 
 //Basic configuration
@@ -19,6 +21,8 @@ app.use(
         allowedHeaders: ["Content-Type", "Authorization"],
     }),
 );
+//Cookie Access
+app.use(cookieParser());
 
 //Healthcheck route
 

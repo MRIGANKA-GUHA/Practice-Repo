@@ -105,3 +105,11 @@ First frontend-> Username Email taken -> sendEmail() called with details emailVe
 //EXPRESS VALIDATOR
 validator-middleware.js is a syntax of the express validator
 npm i express-validator
+
+//COOKIE PARSER
+npm i cookie-parser
+Its used for reading and writing cookies
+
+//VALIDATE
+First of all validator middleware should be made through the syntax then validator index.js where we declare all the things  to trim and everything
+then we set the route and implement those in route and finally in app.js we give that path
