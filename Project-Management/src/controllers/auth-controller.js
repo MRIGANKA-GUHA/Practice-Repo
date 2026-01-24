@@ -2,7 +2,12 @@ import { User } from "../models/user-model.js";
 import { apiResponse } from "../utils/api-response.js";
 import { apiError } from "../utils/api-error.js";
 import { asyncHandler } from "../utils/async-handler.js";
-import { emailVerificationMailgenContent, sendEmail } from "../utils/mail.js";
+import {
+    emailVerificationMailgenContent,
+    forgotPasswordMailgenContent,
+    sendEmail,
+} from "../utils/mail.js";
+import crypto from "crypto";
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -22,7 +27,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { email, username, password, role } = req.body;
+    const { email, username, password,fullName, role } = req.body;
 
     const existedUser = await User.findOne({
         $or: [{ username }, { email }], //it will find the user with same username or email
@@ -37,9 +42,10 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const user = await User.create({
-        email,
-        password,
         username,
+        email,
+        fullName,
+        password,     
         isEmailVerified: false,
     });
 
@@ -174,7 +180,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
     }
 
     let hashedToken = crypto
-        .createHash("sha56")
+        .createHash("sha256")
         .update(verificationToken)
         .digest("hex");
 
@@ -281,7 +287,88 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         );
 });
 
-//const getCurrentUser = asyncHandler(async(req,res) => {})
+const forgotPasswordRequest = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw new apiError(404, "User doesnt exist");
+    }
+
+    const { unHashedToken, hashedToken, tokenExpiry } =
+        user.generateTemporaryToken();
+
+    user.forgotPasswordToken = hashedToken;
+    user.forgotPasswordExpiry = tokenExpiry;
+
+    await user.save({ validateBeforeSave: false });
+
+    await sendEmail({
+        email: user?.email, //it checks the user is there or not
+        subject: "Password reset request",
+        mailgenContent: forgotPasswordMailgenContent(
+            user.username,
+            `${process.env.FORGOT_PASSWORD_REDIRECT_URL}/${unHashedToken}`,
+        ),
+    });
+    return res
+        .status(200)
+        .json(
+            new apiResponse(
+                200,
+                {},
+                "Password reset mail has been sent on your email id",
+            ),
+        );
+});
+const resetForgotPassword = asyncHandler(async (req, res) => {
+    const { resetToken } = req.params;
+    const { newPassword } = req.body;
+
+    let hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+    const user = await User.findOne({
+        forgotPasswordToken: hashedToken,
+        forgotPasswordExpiry: { $gt: Date.now() },
+    });
+
+    if (!user) {
+        throw new apiError(489, "Token is invalid or expired");
+    }
+
+    user.forgotPasswordToken = undefined;
+    user.forgotPasswordExpiry = undefined;
+
+    user.password = newPassword; //It become hashed as i have declare in user model before save in schema the passoword will hash
+    await user.save({ validateBeforeSave: false });
+
+    return res
+        .status(200)
+        .json(new apiResponse(200, {}, "Password reset succesfully"));
+});
+
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+
+    const user = await User.findById(req.user?._id);
+
+    const isPasswordValid = await user.isPasswordCorrect(oldPassword); // this also declared in user model which check the password
+
+    if (!isPasswordValid) {
+        throw new apiError(400, "Invalid old password");
+    }
+    if(oldPassword === newPassword){
+        throw new apiError(400, "New password must be different from old password");
+    }
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+
+    return res
+        .status(200)
+        .json(new apiResponse(200, {}, "Password changed succesfully"));
+});
+
 //const getCurrentUser = asyncHandler(async(req,res) => {})
 export {
     registerUser,
@@ -291,4 +378,7 @@ export {
     verifyEmail,
     resendEmailVerification,
     refreshAccessToken,
+    forgotPasswordRequest,
+    resetForgotPassword,
+    changeCurrentPassword,
 };

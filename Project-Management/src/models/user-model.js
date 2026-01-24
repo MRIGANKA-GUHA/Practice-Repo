@@ -32,7 +32,7 @@ const userSchema = new Schema(
         },
         fullName: {
             type: String,
-            required: [false, "Name is required"], //for temporary purpose i set it false
+            required: [true, "Name is required"], //for temporary purpose i set it false
             trim: true,
         },
         password: {
