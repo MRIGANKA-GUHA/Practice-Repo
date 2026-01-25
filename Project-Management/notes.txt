@@ -113,3 +113,7 @@ Its used for reading and writing cookies
 //VALIDATE
 First of all validator middleware should be made through the syntax then validator index.js where we declare all the things  to trim and everything
 then we set the route and implement those in route and finally in app.js we give that path
+
+//PROJECT MODEL
+Here we make the project schema and taking the reference of the user-model. Here created by is the user reference taken
+same goes with other models too
