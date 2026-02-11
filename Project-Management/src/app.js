@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { router as healthCheckRouter } from "./routes/healthcheck-routes.js";
 import { router as authRouter } from "./routes/auth-routes.js";
+import { router as projectRouter } from "./routes/project-routes.js"
 
 const app = express();
 
@@ -31,4 +32,10 @@ app.use("/api/v1/healthcheck", healthCheckRouter); //it declare the path when so
 //Register route
 app.use("/api/v1/auth", authRouter);
 
+//Project Route
+app.use("/api/v1/projects", projectRouter);
+
+app.get("/", (req,res) => {
+    res.send("Welcome to the Backend-Tutorial")
+})
 export default app;

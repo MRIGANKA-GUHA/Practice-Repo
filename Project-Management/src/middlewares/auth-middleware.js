@@ -31,7 +31,8 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     }
 });
 
-const validateProjectPermission = (roles= []) => {asyncHandler(async (req,res,next) => {
+const validateProjectPermission = (roles= []) => {
+    return asyncHandler(async (req,res,next) => {
         const { projectId } = req.params;
 
         if(!projectId) {
@@ -62,8 +63,6 @@ const validateProjectPermission = (roles= []) => {asyncHandler(async (req,res,ne
         next();
     })
 }
-
-
 
 
 export { verifyJWT , validateProjectPermission };

@@ -66,7 +66,7 @@ const createProjectValidator = () => {
     ]
 }
 
-const addMembertoProjectValidator = () => {
+const addMemberstoProjectValidator = () => {
     return [
         body("email")
             .trim()
@@ -90,5 +90,5 @@ export {
     userForgotPasswordValidator,
     userResetForgotPasswordValidator,
     createProjectValidator,
-    addMembertoProjectValidator
+    addMemberstoProjectValidator
 };
