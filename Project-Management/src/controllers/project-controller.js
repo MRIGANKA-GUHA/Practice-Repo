@@ -331,6 +331,13 @@ const deleteMember = asyncHandler(async(req,res) => {
         projectMember._id,
     )
 
+    if(!projectMember){
+        throw new apiError(
+            400,
+            "Project Member not Found"
+        )
+    }
+
     return res
         .status(200)
         .json(
