@@ -29,15 +29,15 @@ const getProjects = asyncHandler(async (req,res) => {
                                 foreignField: "project",
                                 as: "projectmembers"
                             }
-                        }
-                    ]
+                        },
+                        {
+                            $addFields: {
+                                members: {
+                                    $size: "$projectmembers"
+                                }   
                 }
-            },
-            {
-                $addFields: {
-                    members: {
-                        $size: "$projectmembers"
-                    }
+                        }   
+                    ]
                 }
             },
             {
@@ -45,7 +45,7 @@ const getProjects = asyncHandler(async (req,res) => {
             },
             {
                 $project: {
-                    project:{
+                    projects:{
                         _id: 1,
                         name: 1,
                         description: 1,
@@ -180,10 +180,12 @@ const addMembersToProject = asyncHandler(async(req,res) => {
         )
     }
 
-    await ProjectMember.findByIdAndUpdate(
+    await ProjectMember.findOneAndUpdate(
         {
             user: new mongoose.Types.ObjectId(user._id),
-            project: new mongoose.Types.ObjectId(projectId),
+            project: new mongoose.Types.ObjectId(projectId)
+        },
+        {
             role: role
         },
         {
@@ -205,7 +207,7 @@ const addMembersToProject = asyncHandler(async(req,res) => {
 
 const getProjectMembers = asyncHandler(async(req,res) => {
     const {projectId} = req.params
-    const project = await Project.findById(req.params)
+    const project = await Project.findById(projectId)
 
     if(!project){
         throw new apiError(
@@ -227,14 +229,16 @@ const getProjectMembers = asyncHandler(async(req,res) => {
                     localField: "user",
                     foreignField: "_id",
                     as: "user",
-                    pipeline: {
-                        $project: {
-                            _id: 1,
-                            username: 1,
-                            fullName: 1,
-                            avatar: 1
+                    pipeline: [
+                        {
+                            $project: {
+                                _id: 1,
+                                username: 1,
+                                fullName: 1,
+                                avatar: 1
+                            }
                         }
-                    }
+                    ]
                 }
             },
             {
