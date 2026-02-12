@@ -305,3 +305,7 @@ For Example:-
     }
   }
 ]
+
+//MULTER
+It is used to take the files and give to the express. It acts as a middleware which takes the file from the user and saves the file in the disk or memory
+
