@@ -300,7 +300,7 @@ This repository serves as a practice ground for:
 
 ## 👤 Author
 
-**Your Name**
+**MRIGANKA GUHA**
 
 ## 📄 License
 
