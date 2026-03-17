@@ -1,0 +1,10 @@
+In JSX file(vite) If you want to return u have to pack all the things in div or modern <>....</>
+In Vite u have to export the function name and name the function with first caps letter
+(prev) => !prev  used for toggling in true nad false
+
+useState is used to update the new value in all the areas which generally not possible without this function
+useCallback is used in React to ensure it only work when something change in the parameter given to it, other time render it will not change and take the previous value.Thats why its called callback
+useEffect basically used to run any thing when in page a small thing change due to user interaction like "having number checkbox"
+useRef is used to give the current state of the value and reference the tag in which its used
+
+onClick={copyPasswordToClipboard} if we give () after this function it will automatically run when it will render not when i click
